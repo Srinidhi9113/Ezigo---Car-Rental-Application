@@ -1,0 +1,3 @@
+DROP SCHEMA IF EXISTS ezigo_db;
+
+CREATE SCHEMA ezigo_db;

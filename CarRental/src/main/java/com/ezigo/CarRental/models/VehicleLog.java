@@ -16,7 +16,7 @@ import java.util.Date;
 public class VehicleLog {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     private String licenseNumber;
     private CarType carType;
     private String description;
