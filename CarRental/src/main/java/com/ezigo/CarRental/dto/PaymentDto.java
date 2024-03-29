@@ -1,22 +1,13 @@
-package com.ezigo.CarRental.models;
+package com.ezigo.CarRental.dto;
 
 import com.ezigo.CarRental.enums.PaymentStatus;
 import com.ezigo.CarRental.enums.PaymentType;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import com.ezigo.CarRental.models.Payment;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Date;
-
-@Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "payment")
-public class Payment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PaymentDto {
     private Long id;
     private float amount;
     private PaymentStatus paymentStatus;

@@ -1,20 +1,13 @@
-package com.ezigo.CarRental.models;
+package com.ezigo.CarRental.dto;
 
 import com.ezigo.CarRental.enums.CarType;
 import com.ezigo.CarRental.enums.VehicleStatus;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Lob;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
-@Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "vehicle")
-public class Vehicle {
-    @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+public class VehicleDto {
     private Long id;
     private String licenseNumber;
     private VehicleStatus vehicleStatus;
@@ -24,7 +17,6 @@ public class Vehicle {
     private float mileage;
     private int passengerCapacity;
     private float price;
-    @Column(columnDefinition = "longblob")
     private byte[] image;
 
 }

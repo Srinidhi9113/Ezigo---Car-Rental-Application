@@ -1,22 +1,12 @@
-package com.ezigo.CarRental.models;
+package com.ezigo.CarRental.dto;
 
 import com.ezigo.CarRental.enums.CarType;
 import com.ezigo.CarRental.enums.VehicleStatus;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.Date;
-
-@Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "vehicleLog")
-public class VehicleLog {
-    @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+public class LogsDto {
     private Long id;
     private String licenseNumber;
     private VehicleStatus vehicleStatus;
