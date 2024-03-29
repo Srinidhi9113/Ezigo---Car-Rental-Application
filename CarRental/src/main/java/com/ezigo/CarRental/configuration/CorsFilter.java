@@ -1,4 +1,4 @@
-package com.ooadproject.car_rental_management.configuration;
+package com.ezigo.CarRental.configuration;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
