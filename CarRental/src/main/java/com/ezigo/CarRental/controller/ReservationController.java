@@ -1,5 +1,6 @@
 package com.ezigo.CarRental.controller;
 
+import com.ezigo.CarRental.dto.LoginCustomerDto;
 import com.ezigo.CarRental.dto.ReservationDto;
 import com.ezigo.CarRental.models.Vehicle;
 import com.ezigo.CarRental.models.VehicleReservation;
@@ -23,9 +24,9 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    @GetMapping("/list")
-    public ResponseEntity<?> getReservation(){
-        Optional<List<VehicleReservation>> myList = Optional.ofNullable(reservationService.getReservation());
+    @PostMapping ("/list")
+    public ResponseEntity<?> getReservation(@RequestBody LoginCustomerDto loginCustomerDto){
+        List<VehicleReservation> myList = reservationService.getReservation(loginCustomerDto);
         return new ResponseEntity<>(myList,HttpStatus.FOUND);
     }
 
@@ -36,7 +37,7 @@ public class ReservationController {
         if(dto != null){
             return new ResponseEntity<>("Inserted successfully !!",HttpStatus.CREATED);
         }
-        return new ResponseEntity<>("Could not insert !!",HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>("Could not insert !!",HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/delete")
@@ -45,7 +46,7 @@ public class ReservationController {
         if(success){
             return new ResponseEntity<>("Deleted successfully",HttpStatus.ACCEPTED);
         }
-        return new ResponseEntity<>("Could not delete",HttpStatus.NOT_ACCEPTABLE);
+        return new ResponseEntity<>("Could not delete",HttpStatus.BAD_REQUEST);
     }
 
 }

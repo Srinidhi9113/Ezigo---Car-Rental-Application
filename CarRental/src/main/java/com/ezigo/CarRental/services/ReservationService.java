@@ -1,5 +1,6 @@
 package com.ezigo.CarRental.services;
 
+import com.ezigo.CarRental.dto.LoginCustomerDto;
 import com.ezigo.CarRental.dto.ReservationDto;
 import com.ezigo.CarRental.enums.VehicleReservationStatus;
 import com.ezigo.CarRental.models.VehicleReservation;
@@ -17,8 +18,9 @@ public class ReservationService {
         this.vehicleReservationRepo = vehicleReservationRepo;
     }
 
-    public List<VehicleReservation> getReservation(){
-        return vehicleReservationRepo.findAll();
+    public List<VehicleReservation> getReservation(LoginCustomerDto loginCustomerDto){
+
+       return vehicleReservationRepo.findAllByEmailEquals(loginCustomerDto.getEmail());
     }
 
     public ReservationDto createReservation(ReservationDto reservationDto){

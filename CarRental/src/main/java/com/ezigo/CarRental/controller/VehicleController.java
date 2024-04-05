@@ -40,7 +40,7 @@ public class VehicleController {
            return new ResponseEntity<>("Vehicle Added Successfully !!", HttpStatus.ACCEPTED);
        }
 
-       return new ResponseEntity<>("Could not add vehicle !!",HttpStatus.NOT_ACCEPTABLE);
+       return new ResponseEntity<>("Could not add vehicle !!",HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping("/update")

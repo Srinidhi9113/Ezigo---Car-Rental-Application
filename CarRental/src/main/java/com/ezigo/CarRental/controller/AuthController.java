@@ -1,6 +1,6 @@
 package com.ezigo.CarRental.controller;
 
-import com.ezigo.CarRental.dto.LoginCustomer;
+import com.ezigo.CarRental.dto.LoginCustomerDto;
 import com.ezigo.CarRental.dto.SignupCustomerDto;
 import com.ezigo.CarRental.models.Customer;
 import com.ezigo.CarRental.services.AuthService;
@@ -55,11 +55,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginCustomer(@RequestBody LoginCustomer loginCustomer){
-//        if(authService.findCustomerWithEmail(loginCustomer.getEmail()) && authService.findCustomerWithPassword(loginCustomer.getPassword())){
-//            return new ResponseEntity<>("Login Successful !!",HttpStatus.ACCEPTED);
-//        }
-        if(authService.loginCustomer(loginCustomer.getEmail(), loginCustomer.getPassword())){
+    public ResponseEntity<?> loginCustomer(@RequestBody LoginCustomerDto loginCustomerDto){
+        if(authService.loginCustomer(loginCustomerDto.getEmail(), loginCustomerDto.getPassword())){
             return new ResponseEntity<>("Login Successful !!",HttpStatus.ACCEPTED);
         }
 

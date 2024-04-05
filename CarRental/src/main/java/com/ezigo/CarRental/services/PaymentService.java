@@ -1,5 +1,6 @@
 package com.ezigo.CarRental.services;
 
+import com.ezigo.CarRental.dto.LoginCustomerDto;
 import com.ezigo.CarRental.dto.PaymentDto;
 import com.ezigo.CarRental.enums.PaymentStatus;
 import com.ezigo.CarRental.models.Payment;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PaymentService {
@@ -41,6 +43,10 @@ public class PaymentService {
         return false;
 
 
+    }
+
+    public List<Payment> listPayment(LoginCustomerDto loginCustomerDto){
+        return paymentRepo.findAllByEmailEquals(loginCustomerDto.getEmail());
     }
 
 }
