@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface VehicleRepo extends JpaRepository<Vehicle,Long> {
+public interface VehicleRepo extends JpaRepository<Vehicle,String> {
 
     Optional<Vehicle> findFirstByLicenseNumber(String licenseNumber);
 }

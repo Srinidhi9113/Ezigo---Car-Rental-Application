@@ -14,8 +14,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "vehicle")
 public class Vehicle {
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    private Long id;
     private String licenseNumber;
     private VehicleStatus vehicleStatus;
     private String make;

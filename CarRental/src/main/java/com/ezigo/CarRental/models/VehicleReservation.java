@@ -19,4 +19,8 @@ public class VehicleReservation {
     private String email;
     private Date creationDate;
     private Date returnDate;
+
+    @ManyToOne
+    @JoinColumn(name="vehicle-id")
+    private Vehicle vehicle;
 }

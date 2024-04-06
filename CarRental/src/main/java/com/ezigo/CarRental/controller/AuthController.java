@@ -2,7 +2,7 @@ package com.ezigo.CarRental.controller;
 
 import com.ezigo.CarRental.dto.LoginCustomerDto;
 import com.ezigo.CarRental.dto.SignupCustomerDto;
-import com.ezigo.CarRental.models.Customer;
+import com.ezigo.CarRental.models.Person;
 import com.ezigo.CarRental.services.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    private final List<Customer> customerList;
+    private final List<Person> customerList;
 
     private AuthService authService;
     @Autowired
@@ -25,16 +25,16 @@ public class AuthController {
         this.authService = authService;
 
         this.customerList = new ArrayList<>();
-        customerList.add(new Customer(1L,"Customer1","Customer1@email","123456789","customer1"));
-        customerList.add(new Customer(2L,"Customer2","Customer2@email","364747545","customer2"));
-        customerList.add(new Customer(3L,"Customer3","Customer3@email","346346745","customer3"));
-        customerList.add(new Customer(4L,"Customer4","Customer4@email","467585858","customer4"));
+        customerList.add(new Person(1L,"Customer1","Customer1@email","123456789","customer1"));
+        customerList.add(new Person(2L,"Customer2","Customer2@email","364747545","customer2"));
+        customerList.add(new Person(3L,"Customer3","Customer3@email","346346745","customer3"));
+        customerList.add(new Person(4L,"Customer4","Customer4@email","467585858","customer4"));
 
     }
 
     @GetMapping("/insert")
     public ResponseEntity<?> addCustomerToDBStatic(){
-        for(Customer customer: customerList){
+        for(Person customer: customerList){
             authService.addCustomerToDBStatic(customer);
         }
         return new ResponseEntity<>("Data inserted to the database successfully !", HttpStatus.ACCEPTED);

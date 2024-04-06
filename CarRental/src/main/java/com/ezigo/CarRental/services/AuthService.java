@@ -1,11 +1,9 @@
 package com.ezigo.CarRental.services;
 
 import com.ezigo.CarRental.dto.SignupCustomerDto;
-import com.ezigo.CarRental.models.Customer;
+import com.ezigo.CarRental.models.Person;
 import com.ezigo.CarRental.repository.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,8 +14,8 @@ public class AuthService {
         this.customerRepo = customerRepo;
     }
 
-    public void addCustomerToDBStatic(Customer customer){
-        Customer newCustomer = customerRepo.save(customer);
+    public void addCustomerToDBStatic(Person customer){
+        Person newCustomer = customerRepo.save(customer);
     }
 
     public boolean findCustomerWithEmail(String email){
@@ -25,14 +23,14 @@ public class AuthService {
     }
     public boolean findCustomerWithPassword(String password){ return customerRepo.findFirstByPassword(password).isPresent();}
     public SignupCustomerDto createCustomer(SignupCustomerDto signupCustomerDto){
-        Customer customer = new Customer();
+        Person customer = new Person();
 
         customer.setName(signupCustomerDto.getName());
         customer.setEmail(signupCustomerDto.getEmail());
         customer.setPhoneNo(signupCustomerDto.getPhoneNo());
         customer.setPassword(signupCustomerDto.getPassword());
 
-        Customer createdCustomer = customerRepo.save(customer);
+        Person createdCustomer = customerRepo.save(customer);
 
         SignupCustomerDto newCustomer = new SignupCustomerDto();
         newCustomer.setId(createdCustomer.getId());

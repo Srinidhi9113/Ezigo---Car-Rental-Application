@@ -49,7 +49,6 @@ public class VehicleService {
         try{
             Vehicle vehicle = new Vehicle();
 
-            vehicle.setId(vehicleDto.getId());
             vehicle.setLicenseNumber(vehicleDto.getLicenseNumber());
             vehicle.setVehicleStatus(vehicleDto.getVehicleStatus());
             vehicle.setMake(vehicleDto.getMake());
@@ -71,7 +70,7 @@ public class VehicleService {
 
     public boolean deleteCar(VehicleDto vehicleDto){
         try{
-            vehicleRepo.deleteById(vehicleDto.getId());
+            vehicleRepo.deleteById(vehicleDto.getLicenseNumber());
         }catch (Exception e){
             System.out.println(e);
             return false;

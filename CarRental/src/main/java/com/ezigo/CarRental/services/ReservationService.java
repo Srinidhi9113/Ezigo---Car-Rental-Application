@@ -27,7 +27,6 @@ public class ReservationService {
         VehicleReservation vehicleReservation = new VehicleReservation();
 
         vehicleReservation.setEmail(reservationDto.getEmail());
-        vehicleReservation.setLicenseNumber(reservationDto.getLicenseNumber());
         vehicleReservation.setVehicleReservationStatus(VehicleReservationStatus.valueOf("PENDING"));
         vehicleReservation.setCreationDate(reservationDto.getCreationDate());
         vehicleReservation.setReturnDate(reservationDto.getReturnDate());
