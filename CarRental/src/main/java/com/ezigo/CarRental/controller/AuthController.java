@@ -25,11 +25,10 @@ public class AuthController {
         this.authService = authService;
 
         this.customerList = new ArrayList<>();
-        customerList.add(new Person(1L,"Customer1","Customer1@email","123456789","customer1"));
-        customerList.add(new Person(2L,"Customer2","Customer2@email","364747545","customer2"));
-        customerList.add(new Person(3L,"Customer3","Customer3@email","346346745","customer3"));
-        customerList.add(new Person(4L,"Customer4","Customer4@email","467585858","customer4"));
-
+        customerList.add(new Person("Customer1","Customer1@email","123456789","customer1"));
+        customerList.add(new Person("Customer2","Customer2@email","364747545","customer2"));
+        customerList.add(new Person("Customer3","Customer3@email","346346745","customer3"));
+        customerList.add(new Person("Customer4","Customer4@email","467585858","customer4"));
     }
 
     @GetMapping("/insert")
@@ -46,11 +45,11 @@ public class AuthController {
             return new ResponseEntity<>("Customer with email already exists ",HttpStatus.NOT_ACCEPTABLE);
         }
 
-        SignupCustomerDto newCustomer = authService.createCustomer(signupCustomerDto);
-        if(newCustomer == null){
+        boolean newCustomer = authService.createCustomer(signupCustomerDto);
+        if(!newCustomer){
             return new ResponseEntity<>("Invalid Please try again later !!",HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(newCustomer,HttpStatus.CREATED);
+        return new ResponseEntity<>(true,HttpStatus.CREATED);
 
     }
 

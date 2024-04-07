@@ -1,6 +1,19 @@
 package com.ezigo.CarRental.models;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "account")
 public class Account {
-    private String password;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Person person;
+    private String password;
+
 }

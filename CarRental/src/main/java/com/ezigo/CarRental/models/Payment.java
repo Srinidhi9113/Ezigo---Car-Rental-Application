@@ -18,10 +18,12 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private float amount;
+    private Bill bill;
     private PaymentStatus paymentStatus;
     private PaymentType paymentType;
+// try to implement factory pattern
     private Date creationDate;
-    private String licenseNumber;
-    private String email;
+    private Vehicle vehicle;
+    private Member member;
+
 }

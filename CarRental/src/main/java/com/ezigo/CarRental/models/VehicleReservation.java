@@ -14,9 +14,8 @@ public class VehicleReservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String licenseNumber;
     private VehicleReservationStatus vehicleReservationStatus;
-    private String email;
+    private Person person;
     private Date creationDate;
     private Date returnDate;
 

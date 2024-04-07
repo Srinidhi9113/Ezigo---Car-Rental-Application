@@ -18,8 +18,7 @@ public class VehicleLog {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
-    private String licenseNumber;
-    private VehicleStatus vehicleStatus;
+    private Vehicle vehicle;
     private String description;
     private Date creationDate;
 }

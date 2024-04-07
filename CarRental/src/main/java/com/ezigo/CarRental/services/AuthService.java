@@ -22,21 +22,16 @@ public class AuthService {
         return customerRepo.findFirstByEmail(email).isPresent();
     }
     public boolean findCustomerWithPassword(String password){ return customerRepo.findFirstByPassword(password).isPresent();}
-    public SignupCustomerDto createCustomer(SignupCustomerDto signupCustomerDto){
+    public boolean createCustomer(SignupCustomerDto signupCustomerDto){
         Person customer = new Person();
 
         customer.setName(signupCustomerDto.getName());
         customer.setEmail(signupCustomerDto.getEmail());
         customer.setPhoneNo(signupCustomerDto.getPhoneNo());
         customer.setPassword(signupCustomerDto.getPassword());
-
         Person createdCustomer = customerRepo.save(customer);
-
-        SignupCustomerDto newCustomer = new SignupCustomerDto();
-        newCustomer.setId(createdCustomer.getId());
-
-        return newCustomer;
-
+        if(createdCustomer == null) return false;
+        return true;
     }
 
     public boolean loginCustomer(String email,String password){
