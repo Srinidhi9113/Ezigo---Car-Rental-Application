@@ -5,7 +5,6 @@ import com.ezigo.CarRental.dto.SignInDto;
 import com.ezigo.CarRental.models.User;
 import com.ezigo.CarRental.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
