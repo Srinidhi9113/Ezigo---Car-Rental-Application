@@ -7,13 +7,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+import java.io.Serializable;
+
 @Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "vehicle")
-public class Vehicle {
+public class Vehicle implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String licenseNumber;
     private VehicleStatus vehicleStatus;
     private String make;
@@ -24,5 +27,8 @@ public class Vehicle {
     private float price;
     @Column(columnDefinition = "longblob")
     private byte[] image;
+
+    @OneToOne(mappedBy = "vehicle")
+    private VehicleReservation vehicleReservation;
 
 }

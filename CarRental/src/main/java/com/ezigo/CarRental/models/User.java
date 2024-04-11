@@ -5,18 +5,25 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 @Data
-@NoArgsConstructor
+@Entity
 @AllArgsConstructor
-@Table(name = "person")
-//@Embeddable
-public class Person {
+@NoArgsConstructor
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
-    private String email;
     private String phoneNo;
+    private String username;
     private String password;
+    private String email;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "users")
+    private List<VehicleReservation> vehicleReservationList ;
 
 }

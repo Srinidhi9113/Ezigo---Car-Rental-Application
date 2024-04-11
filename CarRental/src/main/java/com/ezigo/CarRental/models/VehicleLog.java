@@ -1,6 +1,5 @@
 package com.ezigo.CarRental.models;
 
-import com.ezigo.CarRental.enums.CarType;
 import com.ezigo.CarRental.enums.VehicleStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,16 +8,20 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@Entity
 @Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "vehicleLog")
 public class VehicleLog {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
+
+    @OneToOne
+    @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
+
+    private VehicleStatus vehicleStatus;
     private String description;
     private Date creationDate;
 }

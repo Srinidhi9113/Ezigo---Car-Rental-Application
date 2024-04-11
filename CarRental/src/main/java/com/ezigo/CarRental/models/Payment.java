@@ -8,22 +8,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "payment")
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Bill bill;
     private PaymentStatus paymentStatus;
     private PaymentType paymentType;
-// try to implement factory pattern
-    private Date creationDate;
-    private Vehicle vehicle;
-    private Member member;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_bill_id")
+    private Bill bill;
 
 }

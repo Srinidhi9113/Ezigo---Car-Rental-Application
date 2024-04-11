@@ -1,15 +1,15 @@
 package com.ezigo.CarRental.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.context.PayloadApplicationEvent;
 
-@Entity
+import java.util.Date;
+
 @Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
 public class Bill {
@@ -17,5 +17,13 @@ public class Bill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private float amount;
+    private Date createdDate;
+
+//    @OneToOne(cascade = CascadeType.ALL)
+//    private Payment payment;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_vehicle_reservation_id")
     private VehicleReservation vehicleReservation;
+
 }

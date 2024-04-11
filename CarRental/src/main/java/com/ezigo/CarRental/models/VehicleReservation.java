@@ -1,25 +1,38 @@
 package com.ezigo.CarRental.models;
 
 import com.ezigo.CarRental.enums.VehicleReservationStatus;
-import com.ezigo.CarRental.enums.VehicleStatus;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
-@Entity
 @Data
-@Table(name = "vehicleReservation")
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class VehicleReservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private VehicleReservationStatus vehicleReservationStatus;
-    private Person person;
     private Date creationDate;
     private Date returnDate;
 
-    @ManyToOne
-    @JoinColumn(name="vehicle-id")
+    @OneToMany
+    @JoinTable(
+            name = "reservation_user",
+            joinColumns = @JoinColumn(name = "vehiclereservation_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> users;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_vehicle_id")
     private Vehicle vehicle;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Bill bill;
 }
