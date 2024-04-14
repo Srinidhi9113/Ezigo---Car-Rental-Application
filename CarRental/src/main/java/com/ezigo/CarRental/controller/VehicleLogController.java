@@ -25,12 +25,12 @@ public class VehicleLogController {
         return new ResponseEntity<>("Could not insert Logs",HttpStatus.NOT_ACCEPTABLE);
     }
 
-    @GetMapping("admin/list")
+    @GetMapping("admin/list_all")
     public ResponseEntity<?> listAllLogs(){
         return new ResponseEntity<>(vehicleLogService.listAllLogs(),HttpStatus.FOUND);
     }
 
-    @GetMapping("list")
+    @GetMapping("admin/list")
     public ResponseEntity<?> listLogsForVehicle(@RequestBody VehicleLogDto vehicleLogDto){
         Long id;
         try{

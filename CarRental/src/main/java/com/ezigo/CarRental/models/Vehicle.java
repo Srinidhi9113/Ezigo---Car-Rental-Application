@@ -31,4 +31,19 @@ public class Vehicle implements Serializable {
     @OneToOne(mappedBy = "vehicle")
     private VehicleReservation vehicleReservation;
 
+
+    public Vehicle(String licenseNumber, VehicleStatus vehicleStatus, String make, String model,
+                   CarType carType, float mileage, int passengerCapacity, float price, byte[] image) {
+
+        this.licenseNumber = licenseNumber;
+        this.vehicleStatus = vehicleStatus;
+        this.make = make;
+        this.model = model;
+        this.carType = carType;
+        this.mileage = mileage;
+        this.passengerCapacity = passengerCapacity;
+        this.price = price;
+        this.image = image;
+    }
+
 }
