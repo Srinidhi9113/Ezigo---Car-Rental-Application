@@ -19,8 +19,8 @@ public class Bill {
     private float amount;
     private Date createdDate;
 
-//    @OneToOne(cascade = CascadeType.ALL)
-//    private Payment payment;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Payment payment;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_vehicle_reservation_id")

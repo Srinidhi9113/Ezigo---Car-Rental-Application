@@ -26,4 +26,5 @@ public class User {
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "users")
     private List<VehicleReservation> vehicleReservationList ;
 
+
 }
