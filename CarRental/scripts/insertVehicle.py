@@ -8,7 +8,7 @@ def encode_image_to_base64(image_path):
         encoded_string = base64.b64encode(img_file.read()).decode('utf-8')
     return encoded_string
 
-image_path = "/Users/srujanmuralidhar/Downloads/car_1.jpeg"
+image_path = "/Users/srujanmuralidhar/COLLEGE_STUFF/6th_SEM/OOAD/Ezigo---Car-Rental-Application/CarRental/images/car_1.jpeg"
 base64_encoded_image_data = encode_image_to_base64(image_path)
 
 

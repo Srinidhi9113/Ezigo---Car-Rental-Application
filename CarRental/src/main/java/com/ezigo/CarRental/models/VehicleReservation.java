@@ -30,7 +30,7 @@ public class VehicleReservation {
     private List<User> users;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_vehicle_id")
+//    @JoinColumn(name = "fk_vehicle_id")
     private Vehicle vehicle;
 
     @OneToOne(cascade = CascadeType.ALL)

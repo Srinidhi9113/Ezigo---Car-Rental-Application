@@ -18,7 +18,7 @@ public class VehicleLog {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "vehicle_id")
+//    @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 
     private VehicleStatus vehicleStatus;

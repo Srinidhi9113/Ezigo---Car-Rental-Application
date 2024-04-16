@@ -16,5 +16,4 @@ public class VehicleReservationDto {
     private Date returnDate;
     private List<User> users;
     private Vehicle vehicle;
-    private Bill bill;
 }

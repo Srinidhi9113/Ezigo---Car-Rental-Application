@@ -2,7 +2,16 @@ package com.ezigo.CarRental.models;
 
 import com.ezigo.CarRental.enums.CarType;
 import com.ezigo.CarRental.enums.VehicleStatus;
+import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
+@EqualsAndHashCode(callSuper = true)
+@Entity
+@Data
+@NoArgsConstructor
 public class CompactCar extends Vehicle {
     // Constructor
     public CompactCar(String licenseNumber, VehicleStatus vehicleStatus, String make, String model, CarType carType, float mileage,

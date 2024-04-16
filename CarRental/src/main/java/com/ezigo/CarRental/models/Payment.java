@@ -20,7 +20,7 @@ public class Payment {
     private PaymentType paymentType;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "fk_bill_id")
+//    @JoinColumn(name = "fk_bill_id")
     private Bill bill;
 
 }
