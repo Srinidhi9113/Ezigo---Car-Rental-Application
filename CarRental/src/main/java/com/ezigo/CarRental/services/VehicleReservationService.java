@@ -1,11 +1,13 @@
 package com.ezigo.CarRental.services;
 
+import com.ezigo.CarRental.dto.ReservationGetDto;
 import com.ezigo.CarRental.dto.VehicleReservationDto;
 import com.ezigo.CarRental.models.VehicleReservation;
 import com.ezigo.CarRental.repository.VehicleReservationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,9 +20,29 @@ public class VehicleReservationService {
         this.vehicleReservationRepo = vehicleReservationRepo;
     }
 
-    public Optional<List<VehicleReservation>> getReservation(Long id){
-        return Optional.ofNullable(vehicleReservationRepo.findReservationsByUserId(id));
+    public Optional<List<ReservationGetDto>> getReservation(Long id){
+        Optional<List<VehicleReservation>> optionalReservations = Optional.ofNullable(vehicleReservationRepo.findReservationsByUserId(id));
+
+        if (optionalReservations.isPresent()) {
+            List<VehicleReservation> reservations = optionalReservations.get();
+            List<ReservationGetDto> reservationGetDtos = new ArrayList<>();
+
+            for (VehicleReservation reservation : reservations) {
+                ReservationGetDto dto = new ReservationGetDto();
+                dto.setId(reservation.getId());
+                dto.setVehicleReservationStatus(reservation.getVehicleReservationStatus());
+                dto.setCreationDate(reservation.getCreationDate());
+                dto.setReturnDate(reservation.getReturnDate());
+                dto.setVehicle(reservation.getVehicle());
+                reservationGetDtos.add(dto);
+            }
+
+            return Optional.of(reservationGetDtos);
+        } else {
+            return Optional.empty();
+        }
     }
+
     public boolean insertReservation(VehicleReservationDto vehicleReservationDto){
         VehicleReservation reservation = new VehicleReservation();
         reservation.setVehicleReservationStatus(vehicleReservationDto.getVehicleReservationStatus());

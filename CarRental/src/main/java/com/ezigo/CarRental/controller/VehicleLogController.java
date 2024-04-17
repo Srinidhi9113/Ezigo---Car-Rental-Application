@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/logs")
 public class VehicleLogController {
-    private VehicleLogService vehicleLogService;
+    private final VehicleLogService vehicleLogService;
 
     @Autowired
     public VehicleLogController(VehicleLogService vehicleLogService){
@@ -30,12 +30,11 @@ public class VehicleLogController {
         return new ResponseEntity<>(vehicleLogService.listAllLogs(),HttpStatus.FOUND);
     }
 
-    @GetMapping("admin/list")
-    public ResponseEntity<?> listLogsForVehicle(@RequestBody VehicleLogDto vehicleLogDto){
+    @GetMapping("admin/list/{vehicleId}")
+    public ResponseEntity<?> listLogsForVehicle(@PathVariable("vehicleId") Long vehicleId){
         Long id;
         try{
-            id = vehicleLogDto.getVehicle().getId();
-            return new ResponseEntity<>(vehicleLogService.listLogsForVehicle(id),HttpStatus.FOUND);
+            return new ResponseEntity<>(vehicleLogService.listLogsForVehicle(vehicleId),HttpStatus.FOUND);
 
         }
         catch(Exception e){

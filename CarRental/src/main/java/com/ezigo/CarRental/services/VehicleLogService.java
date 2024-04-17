@@ -1,13 +1,16 @@
 package com.ezigo.CarRental.services;
 
+import com.ezigo.CarRental.dto.LogsGetDto;
 import com.ezigo.CarRental.dto.VehicleLogDto;
 import com.ezigo.CarRental.models.VehicleLog;
 import com.ezigo.CarRental.repository.VehicleLogRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -35,12 +38,29 @@ public class VehicleLogService {
         return false;
     }
 
-    public Optional<List<VehicleLog>> listLogsForVehicle(Long vehicleId){
-        return vehicleLogRepo.findAllByVehicleId(vehicleId);
+    public List<LogsGetDto> listLogsForVehicle(Long vehicleId){
+        Optional<List<VehicleLog>> logs = vehicleLogRepo.findAllByVehicleId(vehicleId);
+        return logs.map(this::mapLogsToDto).orElse(Collections.emptyList());
     }
 
-    public Optional<List<VehicleLog>> listAllLogs(){
-        return Optional.of(vehicleLogRepo.findAll());
+    public List<LogsGetDto> listAllLogs(){
+        List<VehicleLog> logs = vehicleLogRepo.findAll();
+        return mapLogsToDto(logs);
+    }
+
+    private List<LogsGetDto> mapLogsToDto(List<VehicleLog> logs) {
+        return logs.stream()
+                .map(this::mapLogToDto)
+                .collect(Collectors.toList());
+    }
+
+    private LogsGetDto mapLogToDto(VehicleLog log) {
+        LogsGetDto dto = new LogsGetDto();
+        dto.setId(log.getId());
+        dto.setVehicleStatus(log.getVehicleStatus());
+        dto.setDescription(log.getDescription());
+        dto.setCreationDate(log.getCreationDate());
+        return dto;
     }
 
 
