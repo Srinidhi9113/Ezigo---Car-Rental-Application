@@ -14,6 +14,6 @@ public class VehicleReservationDto {
     private VehicleReservationStatus vehicleReservationStatus;
     private Date creationDate;
     private Date returnDate;
-    private List<User> users;
+    private User users;
     private Vehicle vehicle;
 }

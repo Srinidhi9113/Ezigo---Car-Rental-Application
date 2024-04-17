@@ -23,7 +23,7 @@ public class User {
     private String password;
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "users")
+    @OneToMany(cascade = CascadeType.MERGE,mappedBy = "users")
     private List<VehicleReservation> vehicleReservationList ;
 
 

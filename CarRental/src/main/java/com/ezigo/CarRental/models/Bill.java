@@ -22,8 +22,7 @@ public class Bill {
     @OneToOne(cascade = CascadeType.ALL)
     private Payment payment;
 
-    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "fk_vehicle_reservation_id")
+    @OneToOne(cascade = CascadeType.MERGE)
     private VehicleReservation vehicleReservation;
 
 }

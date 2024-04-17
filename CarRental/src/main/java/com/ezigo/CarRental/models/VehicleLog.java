@@ -17,10 +17,9 @@ public class VehicleLog {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-//    @JoinColumn(name = "vehicle_id")
-    private Vehicle vehicle;
+    @OneToOne(cascade = CascadeType.MERGE)
 
+    private Vehicle vehicle;
     private VehicleStatus vehicleStatus;
     private String description;
     private Date creationDate;

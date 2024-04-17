@@ -21,18 +21,17 @@ public class VehicleReservation {
     private Date creationDate;
     private Date returnDate;
 
-    @OneToMany
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
     @JoinTable(
             name = "reservation_user",
             joinColumns = @JoinColumn(name = "vehiclereservation_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
-    private List<User> users;
+    private User users;
 
     @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "fk_vehicle_id")
     private Vehicle vehicle;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "vehicleReservation")
     private Bill bill;
 }

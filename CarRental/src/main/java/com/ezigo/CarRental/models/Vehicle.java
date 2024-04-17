@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,8 +29,11 @@ public class Vehicle implements Serializable {
     @Column(columnDefinition = "longblob")
     private byte[] image;
 
-    @OneToOne(mappedBy = "vehicle")
+    @OneToOne(mappedBy = "vehicle",cascade = CascadeType.ALL)
     private VehicleReservation vehicleReservation;
+
+    @OneToOne(mappedBy = "vehicle")
+    private VehicleLog vehicleLog;
 
 
     public Vehicle(String licenseNumber, VehicleStatus vehicleStatus, String make, String model,
