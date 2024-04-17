@@ -19,8 +19,8 @@ public class Payment {
     private PaymentStatus paymentStatus;
     private PaymentType paymentType;
 
-    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "fk_bill_id")
+    @OneToOne
+    @JoinColumn(name = "bill_id")
     private Bill bill;
 
 }

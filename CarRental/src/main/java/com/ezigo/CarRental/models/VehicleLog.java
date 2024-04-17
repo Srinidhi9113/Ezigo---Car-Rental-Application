@@ -18,7 +18,7 @@ public class VehicleLog {
     private Long id;
 
     @OneToOne(cascade = CascadeType.MERGE)
-
+    @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
     private VehicleStatus vehicleStatus;
     private String description;

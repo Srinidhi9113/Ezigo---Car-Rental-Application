@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface VehicleReservationRepo extends JpaRepository<VehicleReservation, Long> {
-    @Query("SELECT vr FROM VehicleReservation vr JOIN vr.users u WHERE u.id = :userId")
-    Optional<List<VehicleReservation>> findReservationByUserId(@Param("userId") Long userId);
+    // Query to find reservations by user ID
+    @Query("SELECT vr FROM VehicleReservation vr WHERE vr.users.id = :userId")
+    List<VehicleReservation> findReservationsByUserId(@Param("userId") Long userId);
 }

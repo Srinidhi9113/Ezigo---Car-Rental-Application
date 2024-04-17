@@ -19,7 +19,7 @@ public class VehicleReservationService {
     }
 
     public Optional<List<VehicleReservation>> getReservation(Long id){
-        return vehicleReservationRepo.findReservationByUserId(id);
+        return Optional.ofNullable(vehicleReservationRepo.findReservationsByUserId(id));
     }
     public boolean insertReservation(VehicleReservationDto vehicleReservationDto){
         VehicleReservation reservation = new VehicleReservation();

@@ -19,10 +19,11 @@ public class Bill {
     private float amount;
     private Date createdDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "bill", cascade = CascadeType.ALL, orphanRemoval = true)
     private Payment payment;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne
+    @JoinColumn(name = "reservation_id")
     private VehicleReservation vehicleReservation;
 
 }

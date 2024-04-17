@@ -29,10 +29,10 @@ public class Vehicle implements Serializable {
     @Column(columnDefinition = "longblob")
     private byte[] image;
 
-    @OneToOne(mappedBy = "vehicle",cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "vehicle",cascade = CascadeType.MERGE)
     private VehicleReservation vehicleReservation;
 
-    @OneToOne(mappedBy = "vehicle")
+    @OneToOne(mappedBy = "vehicle",cascade = CascadeType.MERGE)
     private VehicleLog vehicleLog;
 
 
