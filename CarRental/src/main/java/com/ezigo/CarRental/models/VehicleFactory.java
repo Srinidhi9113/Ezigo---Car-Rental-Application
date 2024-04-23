@@ -24,7 +24,7 @@ public class VehicleFactory {
     static {
         constructors.put(CarType.ECONOMY, EconomyCar::new);
         constructors.put(CarType.COMPACT, CompactCar::new);
-        constructors.put(CarType.STANDARD, StandardCar::new);
+        constructors.put(CarType.SEDAN, SedanCar::new);
         constructors.put(CarType.PREMIUM, PremiumCar::new);
         constructors.put(CarType.LUXURY, LuxuryCar::new);
     }
