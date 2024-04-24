@@ -8,7 +8,6 @@ import lombok.Data;
 @Data
 public class PaymentDto {
     private Long id;
-    private PaymentStatus paymentStatus;
     private PaymentType paymentType;
-    private Bill bill;
+    private Long billId;
 }

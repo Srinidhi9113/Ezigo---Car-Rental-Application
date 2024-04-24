@@ -3,6 +3,8 @@ package com.ezigo.CarRental.Service;
 import com.ezigo.CarRental.Dto.ReservationGetDto;
 import com.ezigo.CarRental.Dto.VehicleReservationDto;
 import com.ezigo.CarRental.Enums.VehicleReservationStatus;
+import com.ezigo.CarRental.Enums.VehicleStatus;
+import com.ezigo.CarRental.Models.Bill;
 import com.ezigo.CarRental.Models.MyUser;
 import com.ezigo.CarRental.Models.Vehicle;
 import com.ezigo.CarRental.Models.VehicleReservation;
@@ -13,8 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class VehicleReservationService {
@@ -54,27 +58,31 @@ public class VehicleReservationService {
         }
     }
 
-    public boolean insertReservation(VehicleReservationDto vehicleReservationDto) {
-            try {
-                Optional<MyUser> user = userRepo.findByUsername(vehicleReservationDto.getName());
-                Optional<Vehicle> car = vehicleRepo.findByLicenseNumber(vehicleReservationDto.getCarRegNum());
-                if (user.isPresent() && car.isPresent()) {
-                    VehicleReservation reservation = new VehicleReservation();
-                    reservation.setVehicleReservationStatus(VehicleReservationStatus.PENDING);
-                    reservation.setCreationDate(vehicleReservationDto.getFromDate());
-                    reservation.setReturnDate(vehicleReservationDto.getToDate());
-                    reservation.setUsers(user.get());
-                    reservation.setVehicle(car.get());
-                    VehicleReservation newReservation = vehicleReservationRepo.save(reservation);
-                    return true;
-                } else {
-                    // Handle case where user or car is not found
-                    return false;
-                }
-            } catch (Exception e) {
-                // Handle specific exceptions or log the error
-                System.err.println("Error creating reservation: " + e.getMessage());
-                return false;
+    public VehicleReservation insertReservation(VehicleReservationDto vehicleReservationDto) {
+        try {
+            Optional<MyUser> user = userRepo.findByUsername(vehicleReservationDto.getName());
+            Optional<Vehicle> car = vehicleRepo.findByLicenseNumber(vehicleReservationDto.getCarRegNum());
+            if (user.isPresent() && car.isPresent()) {
+                VehicleReservation reservation = new VehicleReservation();
+                reservation.setVehicleReservationStatus(VehicleReservationStatus.PENDING);
+                reservation.setCreationDate(vehicleReservationDto.getFromDate());
+                reservation.setReturnDate(vehicleReservationDto.getToDate());
+                MyUser newUser = user.get();
+                Vehicle newCar = car.get();
+                newCar.setVehicleStatus(VehicleStatus.RESERVED);
+                vehicleRepo.save(newCar);
+                reservation.setUsers(newUser);
+                reservation.setVehicle(newCar);
+
+                return vehicleReservationRepo.save(reservation);
+            } else {
+                // Handle case where user or car is not found
+                return null;
             }
+        } catch (Exception e) {
+            // Handle specific exceptions or log the error
+            System.err.println("Error creating reservation: " + e.getMessage());
+            return null;
+        }
     }
 }

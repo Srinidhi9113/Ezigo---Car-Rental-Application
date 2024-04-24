@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -17,22 +18,19 @@ public class VehicleReservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private VehicleReservationStatus vehicleReservationStatus;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date creationDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date returnDate;
 
-    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.MERGE)
-//    @JoinTable(
-//            name = "reservation_user",
-//            joinColumns = @JoinColumn(name = "vehiclereservation_id"),
-//            inverseJoinColumns = @JoinColumn(name = "user_id")
-//    )
+    @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private MyUser users;
 
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 
-//    @OneToOne(cascade = CascadeType.ALL,mappedBy = "vehicleReservation",orphanRemoval = true)
-//    private Bill bill;
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "vehicleReservation",orphanRemoval = true)
+    private Bill bill;
 }

@@ -1,9 +1,13 @@
 package com.ezigo.CarRental.Controllers;
 
 import com.ezigo.CarRental.Enums.CarType;
+import com.ezigo.CarRental.Models.Bill;
 import com.ezigo.CarRental.Models.MyUser;
 import com.ezigo.CarRental.Models.Vehicle;
+import com.ezigo.CarRental.Models.VehicleReservation;
 import com.ezigo.CarRental.Repository.UserRepo;
+import com.ezigo.CarRental.Repository.VehicleReservationRepo;
+import com.ezigo.CarRental.Service.BillService;
 import com.ezigo.CarRental.Service.MyUserDetailsService;
 import com.ezigo.CarRental.Service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +20,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequestMapping("/")
@@ -29,6 +31,12 @@ public class ViewController {
 
     @Autowired
     MyUserDetailsService userDetailsService;
+
+    @Autowired
+    VehicleReservationRepo reservationRepo;
+
+    @Autowired
+    BillService billService;
 
     @Autowired
     ViewController(VehicleService vehicleService){
@@ -82,5 +90,20 @@ public class ViewController {
             model.addAttribute("car",vehicleDetails);
         }
         return "bookcarpage";
+    }
+
+    @GetMapping("/user/bill")
+    public String billPage(@ModelAttribute("reservationId") Long reservationId, Model model) {
+        if (reservationId != null) {
+            // Fetch the reservation object using the reservationId
+            Optional<VehicleReservation> reservation = reservationRepo.findById(reservationId);
+            if (reservation.isPresent()) {
+                Bill bill = billService.calculateBill(reservation.get());
+                if(bill==null) return "redirect:/error";
+                model.addAttribute("bill", bill);
+                return "billpage";
+            }
+        }
+        return "redirect:/error";
     }
 }

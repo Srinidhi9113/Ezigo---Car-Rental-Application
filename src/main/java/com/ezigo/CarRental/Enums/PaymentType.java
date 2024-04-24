@@ -1,8 +1,8 @@
 package com.ezigo.CarRental.Enums;
 
 public enum PaymentType {
-    ONLINE_TRANSACTION,
+    DEBIT_CARD,
     CREDIT_CARD,
-    CASH_ON_DELIVERY,
+    CASH,
     UPI
 }

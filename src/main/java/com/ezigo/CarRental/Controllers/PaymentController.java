@@ -5,12 +5,10 @@ import com.ezigo.CarRental.Service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequestMapping("/api/payment")
 public class PaymentController {
     private final PaymentService paymentService;
@@ -21,11 +19,11 @@ public class PaymentController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<?> insertPayment(@RequestBody PaymentDto paymentDto){
+    public String insertPayment(@ModelAttribute PaymentDto paymentDto){
         if(paymentService.insertPayment(paymentDto)){
-            return new ResponseEntity<>("Payment inserted", HttpStatus.CREATED);
+            return "redirect:/user/all";
         }
-        return new ResponseEntity<>("Could not insert payment",HttpStatus.NOT_ACCEPTABLE);
+        return "redirect:/error";
     }
 
 //    @GetMapping("/get")
