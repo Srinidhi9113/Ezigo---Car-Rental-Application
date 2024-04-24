@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Reservation Booking</title>
+    <style>
+        * {
+            --bg-color-rgb: 255, 245, 224;
+            --primary-color-rgb: 20, 30, 70;
+            --secondary-color-rgb: 65, 176, 110;
+            --secondary-color-light-rgb: 141, 236, 180;
+            font-family: sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-color: rgb(var(--bg-color-rgb));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 600px;
+            padding: 1rem;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 10px;
+            z-index: 10;
+        }
+
+        h2 {
+            color: rgb(var(--primary-color-rgb));
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 2rem;
+            margin: 0;
+            margin-bottom: 10px;
+        }
+
+        label {
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+        }
+
+        input {
+            width: 100%;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            padding: 5px;
+            border-width: 1px;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            padding: 0.4rem;
+            height: fit-content;
+            font-size: 1.5rem;
+            background-color: rgb(var(--primary-color-rgb));
+            color: rgb(var(--bg-color-rgb));
+            margin-top: 1rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        a {
+            text-decoration: none;
+            color: rgb(var(--primary-color-rgb));
+        }
+
+        .message {
+            margin-top: 1rem;
+            color: rgb(var(--primary-color-rgb));
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Car Reservation Booking</h2>
+    <form action="/booking-process" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" th:value="${user.username}" readonly>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" th:value="${user.email}" readonly>
+
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" name="phone" th:value="${user.phoneNumber}" readonly>
+
+        <label for="car-details">Car Details:</label>
+        <input type="text" id="car-details" name="car-details" th:value="@{${car.make}+' '+${car.model}}" readonly>
+
+        <label for="car-details">Car Registration Number:</label>
+        <input type="text" id="car-reg-num" name="car-reg-num" th:value="${car.licenseNumber}" readonly>
+
+        <label for="from-date">From Date:</label>
+        <input type="date" id="from-date" name="from-date" required>
+
+        <label for="to-date">To Date:</label>
+        <input type="date" id="to-date" name="to-date" required>
+
+        <input type="submit" value="Submit Booking">
+    </form>
+</div>
+<script>
+    // Get the current date
+    var currentDate = new Date();
+    var currentDateString = currentDate.toISOString().split('T')[0]; // Get YYYY-MM-DD format
+
+    // Set min attribute for from-date input to the current date
+    document.getElementById('from-date').min = currentDateString;
+
+    // Set min attribute for to-date input to the current date + 1 day
+    currentDate.setDate(currentDate.getDate() + 1);
+    var nextDayDateString = currentDate.toISOString().split('T')[0];
+    document.getElementById('to-date').min = nextDayDateString;
+</script>
+</body>
+</html>
