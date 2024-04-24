@@ -22,7 +22,7 @@ public class VehicleReservationController {
         return new ResponseEntity<>(vehicleReservationService.getReservation(userId), HttpStatus.FOUND);
     }
     @PostMapping("/insert")
-    public ResponseEntity<?> insertReservation(@RequestBody VehicleReservationDto vehicleReservationDto){
+    public ResponseEntity<?> insertReservation(@ModelAttribute VehicleReservationDto vehicleReservationDto){
         if(vehicleReservationService.insertReservation(vehicleReservationDto)){
             return new ResponseEntity<>("Reservaton created ",HttpStatus.CREATED);
         }

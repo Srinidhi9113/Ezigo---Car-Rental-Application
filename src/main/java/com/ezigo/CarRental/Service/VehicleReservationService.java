@@ -2,7 +2,12 @@ package com.ezigo.CarRental.Service;
 
 import com.ezigo.CarRental.Dto.ReservationGetDto;
 import com.ezigo.CarRental.Dto.VehicleReservationDto;
+import com.ezigo.CarRental.Enums.VehicleReservationStatus;
+import com.ezigo.CarRental.Models.MyUser;
+import com.ezigo.CarRental.Models.Vehicle;
 import com.ezigo.CarRental.Models.VehicleReservation;
+import com.ezigo.CarRental.Repository.UserRepo;
+import com.ezigo.CarRental.Repository.VehicleRepo;
 import com.ezigo.CarRental.Repository.VehicleReservationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +19,12 @@ import java.util.Optional;
 @Service
 public class VehicleReservationService {
     private final VehicleReservationRepo vehicleReservationRepo;
+
+    @Autowired
+    UserRepo userRepo;
+
+    @Autowired
+    VehicleRepo vehicleRepo;
 
     @Autowired
     public VehicleReservationService(VehicleReservationRepo vehicleReservationRepo){
@@ -43,20 +54,27 @@ public class VehicleReservationService {
         }
     }
 
-    public boolean insertReservation(VehicleReservationDto vehicleReservationDto){
-        VehicleReservation reservation = new VehicleReservation();
-        reservation.setVehicleReservationStatus(vehicleReservationDto.getVehicleReservationStatus());
-        reservation.setCreationDate(vehicleReservationDto.getCreationDate());
-        reservation.setReturnDate(vehicleReservationDto.getReturnDate());
-        reservation.setUsers(vehicleReservationDto.getUsers());
-        try{
-            VehicleReservation newReservation = vehicleReservationRepo.save(reservation);
-            return true;
-        }catch (Exception e){
-            System.out.println(e);
-        }
-
-        return false;
-
+    public boolean insertReservation(VehicleReservationDto vehicleReservationDto) {
+            try {
+                Optional<MyUser> user = userRepo.findByUsername(vehicleReservationDto.getName());
+                Optional<Vehicle> car = vehicleRepo.findByLicenseNumber(vehicleReservationDto.getCarRegNum());
+                if (user.isPresent() && car.isPresent()) {
+                    VehicleReservation reservation = new VehicleReservation();
+                    reservation.setVehicleReservationStatus(VehicleReservationStatus.PENDING);
+                    reservation.setCreationDate(vehicleReservationDto.getFromDate());
+                    reservation.setReturnDate(vehicleReservationDto.getToDate());
+                    reservation.setUsers(user.get());
+                    reservation.setVehicle(car.get());
+                    VehicleReservation newReservation = vehicleReservationRepo.save(reservation);
+                    return true;
+                } else {
+                    // Handle case where user or car is not found
+                    return false;
+                }
+            } catch (Exception e) {
+                // Handle specific exceptions or log the error
+                System.err.println("Error creating reservation: " + e.getMessage());
+                return false;
+            }
     }
 }

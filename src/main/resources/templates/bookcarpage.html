@@ -89,7 +89,7 @@
 <body>
 <div class="container">
     <h2>Car Reservation Booking</h2>
-    <form action="/booking-process" method="post">
+    <form action="/api/reservation/insert" method="post">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" th:value="${user.username}" readonly>
 
@@ -100,10 +100,10 @@
         <input type="tel" id="phone" name="phone" th:value="${user.phoneNumber}" readonly>
 
         <label for="car-details">Car Details:</label>
-        <input type="text" id="car-details" name="car-details" th:value="@{${car.make}+' '+${car.model}}" readonly>
+        <input type="text" id="car-details" name="carDetails" th:value="@{${car.make}+' '+${car.model}}" readonly>
 
         <label for="car-details">Car Registration Number:</label>
-        <input type="text" id="car-reg-num" name="car-reg-num" th:value="${car.licenseNumber}" readonly>
+        <input type="text" id="car-reg-num" name="carRegNum" th:value="${car.licenseNumber}" readonly>
 
         <label for="from-date">From Date:</label>
         <input type="date" id="from-date" name="from-date" required>

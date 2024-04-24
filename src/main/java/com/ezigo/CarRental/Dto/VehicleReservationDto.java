@@ -5,14 +5,18 @@ import com.ezigo.CarRental.Models.MyUser;
 import com.ezigo.CarRental.Models.Vehicle;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
 public class VehicleReservationDto {
-    private Long id;
-    private VehicleReservationStatus vehicleReservationStatus;
-    private Date creationDate;
-    private Date returnDate;
-    private MyUser users;
-    private Vehicle vehicle;
+    private String name;
+    private String email;
+    private String phone;
+    private String carDetails;
+    private String carRegNum;
+    private Date fromDate;
+    private Date toDate;
+
+    // Constructors, getters, and setters
 }

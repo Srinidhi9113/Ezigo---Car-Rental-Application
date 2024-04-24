@@ -33,6 +33,6 @@ public class VehicleReservation {
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 
-    @OneToOne(cascade = CascadeType.ALL,mappedBy = "vehicleReservation",orphanRemoval = true)
-    private Bill bill;
+//    @OneToOne(cascade = CascadeType.ALL,mappedBy = "vehicleReservation",orphanRemoval = true)
+//    private Bill bill;
 }
