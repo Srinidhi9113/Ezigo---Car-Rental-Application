@@ -1,0 +1,57 @@
+[
+  {
+    "licenseNumber": "ABC456",
+    "vehicleStatus": "AVAILABLE",
+    "make": "Toyota",
+    "model": "Corolla",
+    "carType": "SEDAN",
+    "mileage": 12.5,
+    "passengerCapacity": 5,
+    "price": 2000.0,
+    "image_path": "images/car_1.jpeg"
+  },
+  {
+    "licenseNumber": "XYZ123",
+    "vehicleStatus": "AVAILABLE",
+    "make": "Tata",
+    "model": "Nexon",
+    "carType": "ECONOMY",
+    "mileage": 12.0,
+    "passengerCapacity": 4,
+    "price": 1500.0,
+    "image_path": "images/car_2.jpeg"
+  },
+  {
+    "licenseNumber": "DEF789",
+    "vehicleStatus": "AVAILABLE",
+    "make": "Honda",
+    "model": "Civic",
+    "carType": "SEDAN",
+    "mileage": 11.0,
+    "passengerCapacity": 5,
+    "price": 2000.0,
+    "image_path": "images/car_3.jpeg"
+  },
+  {
+    "licenseNumber": "GHI012",
+    "vehicleStatus": "AVAILABLE",
+    "make": "Ford",
+    "model": "Fusion",
+    "carType": "COMPACT",
+    "mileage": 15,
+    "passengerCapacity": 5,
+    "price": 1800.0,
+    "image_path": "images/car_4.jpeg"
+  },
+  {
+    "licenseNumber": "JKL345",
+    "vehicleStatus": "AVAILABLE",
+    "make": "Chevrolet",
+    "model": "Malibu",
+    "carType": "LUXURY",
+    "mileage": 7,
+    "passengerCapacity": 7,
+    "price": 3500.0,
+    "image_path": "images/car_5.jpeg"
+  }
+]
