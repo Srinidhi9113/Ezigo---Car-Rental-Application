@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <style>
+        *{
+    --bg-color-rgb: 255, 245, 224;
+    --primary-color-rgb: 20, 30, 70;
+    --secondary-color-rgb: 65, 176, 110;
+    --secondary-color-light-rgb: 141, 236, 180;
+    font-family: sans-serif;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: rgb(var(--bg-color-rgb));
+    display: flex;
+    overflow: hidden;
+}
+
+body:hover .mouse-trailer{
+    opacity: 1;
+}
+
+.mouse-trailer{
+    position: fixed;
+    aspect-ratio: 1;
+    width: 2rem;
+    background-color: rgb(var(--secondary-color-light-rgb));
+    border-radius: 100%;
+
+    left: 0;
+    top: 0;
+    z-index: 5;
+
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 500ms ease;
+}
+
+.left-partition{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-div{
+    color: rgb(var(--primary-color-rgb));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+}
+
+.right-partition{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.login-div{
+    padding: 2rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    color:rgb(var(--bg-color-rgb));
+    background: rgba(var(--secondary-color-rgb),1);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 8px );
+    -webkit-backdrop-filter: blur( 8px );
+    border-radius: 10px;
+    width: 50%;
+    height: fit-content;
+    z-index: 10;
+}
+
+.login-div:hover .mouse-trailer{
+    opacity: 0;
+}
+
+.login-div > h2{
+    padding: 0;
+    margin: 0;
+    margin-bottom: 1rem;
+    font-size: 3rem;
+}
+
+.login-div label{
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+}
+
+.login-div input{
+    width: 100%;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    padding: 5px;
+    border-width: 0px;
+}
+
+.login-div input[type=submit]{
+    width: 100%;
+    padding: 0.4rem;
+    height: fit-content;
+    font-size: 1.5rem;
+    background-color: rgb(var(--primary-color-rgb));
+    color: rgb(var(--bg-color-rgb));
+    margin-top: 1rem;
+}
+
+.login-div input[type=submit]:hover{
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    cursor: pointer;
+}
+
+.login-div a{
+    text-decoration: none;
+    color: rgb(var(--bg-color-rgb));
+}
+
+.login-div span{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.blobs{
+    border-radius: 100%;
+    aspect-ratio: 1;
+    position: absolute;
+    width: 10rem;
+}
+
+.blobs:nth-child(3){
+    --size: 12rem;
+    left: calc(0px - var(--size)/2);
+    width: var(--size);
+    top: calc(100vh - var(--size));
+    background: rgb(var(--primary-color-rgb));
+}
+
+.blobs:nth-child(2){
+    --size: 18rem;
+    left: calc(0 + var(--size));
+    width: var(--size);
+    top: calc(100vh - var(--size)/2);
+    background: rgb(var(--secondary-color-light-rgb));
+}
+
+.blobs:nth-child(4){
+    --size: 20rem;
+    left: calc(100vw - var(--size)/2 );
+    width: var(--size);
+    top: calc(0 + var(--size)/2 );
+    background: rgb(var(--secondary-color-rgb));
+}
+
+.blobs:nth-child(5){
+    --size: 14rem;
+    left: calc(100vw - var(--size));
+    width: var(--size);
+    top: calc(0px - var(--size)/2);
+    background: rgb(var(--secondary-color-light-rgb));
+}
+    </style>
+</head>
+<body>
+    <div class="mouse-trailer"></div>
+    <div class="blobs"></div>
+    <div class="blobs"></div>
+    <div class="blobs"></div>
+    <div class="blobs"></div>
+    <div class="left-partition">
+    <div class="title-div">
+        <h1>
+            Ezigo
+        </h1>
+    </div>
+</div>
+    <div class="right-partition">
+        <div class="login-div">
+            <h2>SignUp</h2>
+            <form action="/signup" method="post">
+            <label>Username:</label><input name="username" type="text"/>
+            <label>Email ID:</label><input name="email" type="text"/>
+                <label>Phone Number:</label><input name="phoneNumber" type="tel"/>
+            <label>Password:</label><input name="password" type="password"/>
+            <input type="submit" value="SignUp!!!"/>
+            </form>
+            <span>Already have an account...<a href="login">Login</a></span>
+
+        </div>
+    </div>
+</body>
+<script src="./trailer.js" defer></script>
+</html>
